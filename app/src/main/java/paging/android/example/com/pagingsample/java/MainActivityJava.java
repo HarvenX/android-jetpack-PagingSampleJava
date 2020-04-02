@@ -3,25 +3,19 @@ package paging.android.example.com.pagingsample.java;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.textservice.TextInfo;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.paging.PagedList;
-import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import paging.android.example.com.pagingsample.Cheese;
 import paging.android.example.com.pagingsample.CheeseAdapter;
 import paging.android.example.com.pagingsample.CheeseViewHolder;
-import paging.android.example.com.pagingsample.CheeseViewModel;
 import paging.android.example.com.pagingsample.R;
 import paging.android.example.com.pagingsample.databinding.ActivityMainBinding;
 

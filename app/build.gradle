@@ -59,6 +59,7 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.paging_ktx
     implementation deps.kotlin.stdlib
+    implementation "android.arch.persistence.room:runtime:1.1.1"
 
     // Android Testing Support Library's runner and rules
     androidTestImplementation deps.atsl.core
