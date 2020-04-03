@@ -2,6 +2,8 @@ package paging.android.example.com.pagingsample.java;
 
 import android.app.Application;
 
+import java.util.concurrent.Executors;
+
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
@@ -31,20 +33,20 @@ public class CheeseViewModelJava {
     }
 
     public void insert(CharSequence text){
-        new Thread(new Runnable() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 dao.insert(new CheeseJava(0,text.toString()));
             }
-        }).start();
+        });
     }
 
     public void remove(CheeseJava cheese){
-        new Thread(new Runnable() {
+        Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 dao.delete(cheese);
             }
-        }).start();
+        });
     }
 }

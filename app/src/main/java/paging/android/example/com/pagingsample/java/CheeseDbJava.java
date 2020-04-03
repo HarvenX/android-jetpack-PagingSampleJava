@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -30,13 +31,12 @@ public abstract class CheeseDbJava extends RoomDatabase {
                             .addCallback(new Callback() {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            getInstance(context).CheeseJavaDao().insert(toCheeseJavaList(CheeseJava_DATA));
-                                        }
-                                    }).start();
-
+                                Executors.newSingleThreadExecutor().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getInstance(context).CheeseJavaDao().insert(toCheeseJavaList(CheeseJava_DATA));
+                                    }
+                                });
                                 }
                             })
                             .build();;
