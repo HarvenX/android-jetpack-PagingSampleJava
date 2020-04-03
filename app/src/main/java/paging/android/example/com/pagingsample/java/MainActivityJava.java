@@ -31,14 +31,9 @@ public class MainActivityJava extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         viewModel = new CheeseViewModelJava(getApplication());
         mainBinding =  DataBindingUtil.setContentView(this, R.layout.activity_main);
-        CheeseAdapter adapter = new CheeseAdapter();
+        CheeseAdapterJava adapter = new CheeseAdapterJava();
         mainBinding.cheeseList.setAdapter(adapter);
-        viewModel.getAllCheeses().observe(this, new Observer<PagedList<Cheese>>() {
-            @Override
-            public void onChanged(PagedList<Cheese> cheeses) {
-                adapter.submitList(cheeses);
-            }
-        });
+        viewModel.getAllCheeses().observe(this, cheeses -> adapter.submitList(cheeses));
         initAddButtonListener();
         initSwipeToDelete();
     }
@@ -57,10 +52,10 @@ public class MainActivityJava extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                if(viewHolder instanceof CheeseViewHolder){
-                    CheeseViewHolder cheeseViewHolder = (CheeseViewHolder) viewHolder;
-                    if(cheeseViewHolder.getCheese() != null){
-                        viewModel.remove(cheeseViewHolder.getCheese());
+                if(viewHolder instanceof CheeseViewHolderJava){
+                    CheeseViewHolderJava cheeseViewHolder = (CheeseViewHolderJava) viewHolder;
+                    if(cheeseViewHolder.getCheeseJava() != null){
+                        viewModel.remove(cheeseViewHolder.getCheeseJava());
                     }
                 }
             }

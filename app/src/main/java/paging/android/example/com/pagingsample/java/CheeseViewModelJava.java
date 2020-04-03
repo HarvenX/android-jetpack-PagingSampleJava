@@ -5,8 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-import paging.android.example.com.pagingsample.Cheese;
-import paging.android.example.com.pagingsample.CheeseDao;
 
 /**
  * Created by xiehuawen(Harven) on 2020/4/1.
@@ -15,20 +13,20 @@ public class CheeseViewModelJava {
 
 
     private final CheeseDaoJava dao;
-    private final LiveData<PagedList<Cheese>> allCheeses;
+    private final LiveData<PagedList<CheeseJava>> allCheeses;
 
     public CheeseViewModelJava(Application app) {
-        dao = CheeseDbJava.getInstance(app).cheeseDao();
+        dao = CheeseDbJava.getInstance(app).CheeseJavaDao();
 
         PagedList.Config config = new PagedList.Config.Builder().
-                setPageSize(5).
+                setPageSize(40).
                 setEnablePlaceholders(true).
                 setMaxSize(200).
                 build();//PagedListConfigKt.Config(1,0,true,0,200);
         allCheeses = new LivePagedListBuilder<>(dao.allCheesesByName(),config).build();//.toLiveData(dao.allCheesesByName(),config,null,null, ArchTaskExecutor.getIOThreadExecutor() );
     }
 
-    public LiveData<PagedList<Cheese>> getAllCheeses() {
+    public LiveData<PagedList<CheeseJava>> getAllCheeses() {
         return allCheeses;
     }
 
@@ -36,12 +34,12 @@ public class CheeseViewModelJava {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                dao.insert(new Cheese(0,text.toString()));
+                dao.insert(new CheeseJava(0,text.toString()));
             }
         }).start();
     }
 
-    public void remove(Cheese cheese){
+    public void remove(CheeseJava cheese){
         new Thread(new Runnable() {
             @Override
             public void run() {

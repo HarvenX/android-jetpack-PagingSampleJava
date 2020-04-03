@@ -19,16 +19,16 @@ public interface CheeseDaoJava {
      * Room knows how to return a LivePagedListProvider, from which we can get a LiveData and serve
      * it back to UI via ViewModel.
      */
-    @Query("SELECT * FROM Cheese ORDER BY name COLLATE NOCASE ASC")
-    DataSource.Factory<Integer, Cheese> allCheesesByName();
+    @Query("SELECT * FROM CheeseJava ORDER BY name COLLATE NOCASE ASC")
+    DataSource.Factory<Integer, CheeseJava> allCheesesByName();
 
     @Insert
-    void insert( List<Cheese> cheeses);
+    void insert( List<CheeseJava> cheeses);
 
     @Insert
-    void insert(Cheese cheese);
+    void insert(CheeseJava cheese);
 
     @Delete
-    void delete(Cheese cheese);
+    void delete(CheeseJava cheese);
 
 }

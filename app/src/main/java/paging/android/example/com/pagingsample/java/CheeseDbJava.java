@@ -12,29 +12,28 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import kotlin.collections.CollectionsKt;
-import paging.android.example.com.pagingsample.Cheese;
 
 /**
  * Created by xiehuawen(Harven) on 2020/4/2.
  */
-@Database(entities = {Cheese.class}, version = 1)
+@Database(entities = {CheeseJava.class}, version = 1)
 public abstract class CheeseDbJava extends RoomDatabase {
     private static volatile CheeseDbJava mInstance;
 
-    public abstract CheeseDaoJava cheeseDao();
+    public abstract CheeseDaoJava CheeseJavaDao();
 
     public static CheeseDbJava getInstance(Context context) {
         if (mInstance == null) {
             synchronized (CheeseDbJava.class) {
                 if (mInstance == null) {
-                    mInstance = Room.databaseBuilder(context.getApplicationContext(), CheeseDbJava.class, "CheeseDatabase")
+                    mInstance = Room.databaseBuilder(context.getApplicationContext(), CheeseDbJava.class, "CheeseJavaDatabase")
                             .addCallback(new Callback() {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                     new Thread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            getInstance(context).cheeseDao().insert(toCheeseList(CHEESE_DATA));
+                                            getInstance(context).CheeseJavaDao().insert(toCheeseJavaList(CheeseJava_DATA));
                                         }
                                     }).start();
 
@@ -47,32 +46,32 @@ public abstract class CheeseDbJava extends RoomDatabase {
         return mInstance;
     }
 
-    private static final List<Cheese> toCheeseList(@NonNull List<String> strings){
-        List<Cheese> cheeseList = new ArrayList<>();
+    private static final List<CheeseJava> toCheeseJavaList(@NonNull List<String> strings){
+        List<CheeseJava> CheeseJavaList = new ArrayList<>();
         for(String name:strings){
-            Cheese cheese = new Cheese(0,name);
-            cheeseList.add(cheese);
+            CheeseJava CheeseJava = new CheeseJava(0,name);
+            CheeseJavaList.add(CheeseJava);
         }
-        return cheeseList;
+        return CheeseJavaList;
     }
 
-    private static final ArrayList<String> CHEESE_DATA = CollectionsKt.arrayListOf(
+    private static final ArrayList<String> CheeseJava_DATA = CollectionsKt.arrayListOf(
             "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam", "Abondance", "Ackawi",
             "Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu", "Airag", "Airedale",
-            "Aisy Cendre", "Allgauer Emmentaler", "Alverca", "Ambert", "American Cheese",
+            "Aisy Cendre", "Allgauer Emmentaler", "Alverca", "Ambert", "American CheeseJava",
             "Ami du Chambertin", "Anejo Enchilado", "Anneau du Vic-Bilh", "Anthoriro", "Appenzell",
             "Aragon", "Ardi Gasna", "Ardrahan", "Armenian String", "Aromes au Gene de Marc",
             "Asadero", "Asiago", "Aubisque Pyrenees", "Autun", "Avaxtskyr", "Baby Swiss",
             "Babybel", "Baguette Laonnaise", "Bakers", "Baladi", "Balaton", "Bandal", "Banon",
-            "Barry's Bay Cheddar", "Basing", "Basket Cheese", "Bath Cheese", "Bavarian Bergkase",
-            "Baylough", "Beaufort", "Beauvoorde", "Beenleigh Blue", "Beer Cheese", "Bel Paese",
+            "Barry's Bay Cheddar", "Basing", "Basket CheeseJava", "Bath CheeseJava", "Bavarian Bergkase",
+            "Baylough", "Beaufort", "Beauvoorde", "Beenleigh Blue", "Beer CheeseJava", "Bel Paese",
             "Bergader", "Bergere Bleue", "Berkswell", "Beyaz Peynir", "Bierkase", "Bishop Kennedy",
             "Blarney", "Bleu d'Auvergne", "Bleu de Gex", "Bleu de Laqueuille",
             "Bleu de Septmoncel", "Bleu Des Causses", "Blue", "Blue Castello", "Blue Rathgore",
-            "Blue Vein (Australian)", "Blue Vein Cheeses", "Bocconcini", "Bocconcini (Australian)",
+            "Blue Vein (Australian)", "Blue Vein CheeseJavas", "Bocconcini", "Bocconcini (Australian)",
             "Boeren Leidenkaas", "Bonchester", "Bosworth", "Bougon", "Boule Du Roves",
             "Boulette d'Avesnes", "Boursault", "Boursin", "Bouyssou", "Bra", "Braudostur",
-            "Breakfast Cheese", "Brebis du Lavort", "Brebis du Lochois", "Brebis du Puyfaucon",
+            "Breakfast CheeseJava", "Brebis du Lavort", "Brebis du Lochois", "Brebis du Puyfaucon",
             "Bresse Bleu", "Brick", "Brie", "Brie de Meaux", "Brie de Melun", "Brillat-Savarin",
             "Brin", "Brin d' Amour", "Brin d'Amour", "Brinza (Burduf Brinza)",
             "Briquette de Brebis", "Briquette du Forez", "Broccio", "Broccio Demi-Affine",
@@ -88,8 +87,8 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Cheddar Clothbound", "Cheshire", "Chevres", "Chevrotin des Aravis", "Chontaleno",
             "Civray", "Coeur de Camembert au Calvados", "Coeur de Chevre", "Colby", "Cold Pack",
             "Comte", "Coolea", "Cooleney", "Coquetdale", "Corleggy", "Cornish Pepper",
-            "Cotherstone", "Cotija", "Cottage Cheese", "Cottage Cheese (Australian)",
-            "Cougar Gold", "Coulommiers", "Coverdale", "Crayeux de Roncq", "Cream Cheese",
+            "Cotherstone", "Cotija", "Cottage CheeseJava", "Cottage CheeseJava (Australian)",
+            "Cougar Gold", "Coulommiers", "Coverdale", "Crayeux de Roncq", "Cream CheeseJava",
             "Cream Havarti", "Crema Agria", "Crema Mexicana", "Creme Fraiche", "Crescenza",
             "Croghan", "Crottin de Chavignol", "Crottin du Chavignol", "Crowdie", "Crowley",
             "Cuajada", "Curd", "Cure Nantais", "Curworthy", "Cwmtawe Pecorino",
@@ -103,20 +102,20 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Esrom", "Etorki", "Evansdale Farmhouse Brie", "Evora De L'Alentejo", "Exmoor Blue",
             "Explorateur", "Feta", "Feta (Australian)", "Figue", "Filetta", "Fin-de-Siecle",
             "Finlandia Swiss", "Finn", "Fiore Sardo", "Fleur du Maquis", "Flor de Guia",
-            "Flower Marie", "Folded", "Folded cheese with mint", "Fondant de Brebis",
+            "Flower Marie", "Folded", "Folded CheeseJava with mint", "Fondant de Brebis",
             "Fontainebleau", "Fontal", "Fontina Val d'Aosta", "Formaggio di capra", "Fougerus",
             "Four Herb Gouda", "Fourme d' Ambert", "Fourme de Haute Loire", "Fourme de Montbrison",
             "Fresh Jack", "Fresh Mozzarella", "Fresh Ricotta", "Fresh Truffles", "Fribourgeois",
             "Friesekaas", "Friesian", "Friesla", "Frinault", "Fromage a Raclette", "Fromage Corse",
-            "Fromage de Montagne de Savoie", "Fromage Frais", "Fruit Cream Cheese",
-            "Frying Cheese", "Fynbo", "Gabriel", "Galette du Paludier", "Galette Lyonnaise",
+            "Fromage de Montagne de Savoie", "Fromage Frais", "Fruit Cream CheeseJava",
+            "Frying CheeseJava", "Fynbo", "Gabriel", "Galette du Paludier", "Galette Lyonnaise",
             "Galloway Goat's Milk Gems", "Gammelost", "Gaperon a l'Ail", "Garrotxa", "Gastanberra",
             "Geitost", "Gippsland Blue", "Gjetost", "Gloucester", "Golden Cross", "Gorgonzola",
             "Gornyaltajski", "Gospel Green", "Gouda", "Goutu", "Gowrie", "Grabetto", "Graddost",
             "Grafton Village Cheddar", "Grana", "Grana Padano", "Grand Vatel",
             "Grataron d' Areches", "Gratte-Paille", "Graviera", "Greuilh", "Greve",
             "Gris de Lille", "Gruyere", "Gubbeen", "Guerbigny", "Halloumi",
-            "Halloumy (Australian)", "Haloumi-Style Cheese", "Harbourne Blue", "Havarti",
+            "Halloumy (Australian)", "Haloumi-Style CheeseJava", "Harbourne Blue", "Havarti",
             "Heidi Gruyere", "Hereford Hop", "Herrgardsost", "Herriot Farmhouse", "Herve",
             "Hipi Iti", "Hubbardston Blue Cow", "Hushallsost", "Iberico", "Idaho Goatster",
             "Idiazabal", "Il Boschetto al Tartufo", "Ile d'Yeu", "Isle of Mull", "Jarlsberg",
@@ -131,12 +130,12 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Livarot", "Llanboidy", "Llanglofan Farmhouse", "Loch Arthur Farmhouse",
             "Loddiswell Avondale", "Longhorn", "Lou Palou", "Lou Pevre", "Lyonnais", "Maasdam",
             "Macconais", "Mahoe Aged Gouda", "Mahon", "Malvern", "Mamirolle", "Manchego",
-            "Manouri", "Manur", "Marble Cheddar", "Marbled Cheeses", "Maredsous", "Margotin",
+            "Manouri", "Manur", "Marble Cheddar", "Marbled CheeseJavas", "Maredsous", "Margotin",
             "Maribo", "Maroilles", "Mascares", "Mascarpone", "Mascarpone (Australian)",
             "Mascarpone Torta", "Matocq", "Maytag Blue", "Meira", "Menallack Farmhouse",
             "Menonita", "Meredith Blue", "Mesost", "Metton (Cancoillotte)", "Meyer Vintage Gouda",
             "Mihalic Peynir", "Milleens", "Mimolette", "Mine-Gabhar", "Mini Baby Bells", "Mixte",
-            "Molbo", "Monastery Cheeses", "Mondseer", "Mont D'or Lyonnais", "Montasio",
+            "Molbo", "Monastery CheeseJavas", "Mondseer", "Mont D'or Lyonnais", "Montasio",
             "Monterey Jack", "Monterey Jack Dry", "Morbier", "Morbier Cru de Montagne",
             "Mothais a la Feuille", "Mozzarella", "Mozzarella (Australian)",
             "Mozzarella di Bufala", "Mozzarella Fresh, in water", "Mozzarella Rolls", "Munster",
@@ -152,7 +151,7 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Pelardon des Cevennes", "Pelardon des Corbieres", "Penamellera", "Penbryn",
             "Pencarreg", "Perail de Brebis", "Petit Morin", "Petit Pardou", "Petit-Suisse",
             "Picodon de Chevre", "Picos de Europa", "Piora", "Pithtviers au Foin",
-            "Plateau de Herve", "Plymouth Cheese", "Podhalanski", "Poivre d'Ane", "Polkolbin",
+            "Plateau de Herve", "Plymouth CheeseJava", "Podhalanski", "Poivre d'Ane", "Polkolbin",
             "Pont l'Eveque", "Port Nicholson", "Port-Salut", "Postel", "Pouligny-Saint-Pierre",
             "Pourly", "Prastost", "Pressato", "Prince-Jean", "Processed Cheddar", "Provolone",
             "Provolone (Australian)", "Pyengana Cheddar", "Pyramide", "Quark",
@@ -171,11 +170,11 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Selles sur Cher", "Selva", "Serat", "Seriously Strong Cheddar", "Serra da Estrela",
             "Sharpam", "Shelburne Cheddar", "Shropshire Blue", "Siraz", "Sirene", "Smoked Gouda",
             "Somerset Brie", "Sonoma Jack", "Sottocenare al Tartufo", "Soumaintrain",
-            "Sourire Lozerien", "Spenwood", "Sraffordshire Organic", "St. Agur Blue Cheese",
+            "Sourire Lozerien", "Spenwood", "Sraffordshire Organic", "St. Agur Blue CheeseJava",
             "Stilton", "Stinking Bishop", "String", "Sussex Slipcote", "Sveciaost", "Swaledale",
             "Sweet Style Swiss", "Swiss", "Syrian (Armenian String)", "Tala", "Taleggio", "Tamie",
             "Tasmania Highland Chevre Log", "Taupiniere", "Teifi", "Telemea", "Testouri",
-            "Tete de Moine", "Tetilla", "Texas Goat Cheese", "Tibet", "Tillamook Cheddar",
+            "Tete de Moine", "Tetilla", "Texas Goat CheeseJava", "Tibet", "Tillamook Cheddar",
             "Tilsit", "Timboon Brie", "Toma", "Tomme Brulee", "Tomme d'Abondance",
             "Tomme de Chevre", "Tomme de Romans", "Tomme de Savoie", "Tomme des Chouans", "Tommes",
             "Torta del Casar", "Toscanello", "Touree de L'Aubier", "Tourmalet",
@@ -183,7 +182,7 @@ public abstract class CheeseDbJava extends RoomDatabase {
             "Tupi", "Turunmaa", "Tymsboro", "Tyn Grug", "Tyning", "Ubriaco", "Ulloa",
             "Vacherin-Fribourgeois", "Valencay", "Vasterbottenost", "Venaco", "Vendomois",
             "Vieux Corse", "Vignotte", "Vulscombe", "Waimata Farmhouse Blue",
-            "Washed Rind Cheese (Australian)", "Waterloo", "Weichkaese", "Wellington",
+            "Washed Rind CheeseJava (Australian)", "Waterloo", "Weichkaese", "Wellington",
             "Wensleydale", "White Stilton", "Whitestone Farmhouse", "Wigmore", "Woodside Cabecou",
             "Xanadu", "Xynotyro", "Yarg Cornish", "Yarra Valley Pyramid", "Yorkshire Blue",
             "Zamorano", "Zanetti Grana Padano", "Zanetti Parmigiano Reggiano");
